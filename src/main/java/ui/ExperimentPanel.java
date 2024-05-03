@@ -51,6 +51,8 @@ public class ExperimentPanel extends JPanel {
                 if (selectedPopulation != null) {
                     experiment.removeBacteriaPopulation(selectedPopulation);
                     updateList();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Please select a bacteria population to remove.");
                 }
             }
         });
