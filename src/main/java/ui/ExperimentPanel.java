@@ -23,6 +23,7 @@ public class ExperimentPanel extends JPanel {
 
         // Create a button to add a new bacteria population
         JButton addButton = new JButton("Add Bacteria Population");
+        addButton.setBackground(Color.GREEN); // Set button color to green
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -43,6 +44,7 @@ public class ExperimentPanel extends JPanel {
 
         // Create a button to remove a bacteria population
         JButton removeButton = new JButton("Remove Bacteria Population");
+        removeButton.setBackground(Color.RED); // Set button color to red
         removeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -60,6 +62,7 @@ public class ExperimentPanel extends JPanel {
 
         // Create a button to view details of a bacteria population
         JButton viewDetailsButton = new JButton("View Details");
+        viewDetailsButton.setBackground(Color.BLUE); // Set button color to blue
         viewDetailsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -74,6 +77,31 @@ public class ExperimentPanel extends JPanel {
             }
         });
         add(viewDetailsButton, BorderLayout.EAST);
+
+        // Create a button to save a bacteria population
+        JButton saveButton = new JButton("Save Bacteria Population");
+        saveButton.setBackground(Color.ORANGE); // Set button color to orange
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Save the selected bacteria population
+                BacteriaPopulation selectedPopulation = list.getSelectedValue();
+                if (selectedPopulation != null) {
+                    String filename = JOptionPane.showInputDialog("Enter a name for the save file:");
+                    if (filename != null) {
+                        try {
+                            ExperimentFileHandler.saveBacteriaPopulation(selectedPopulation, filename);
+                            JOptionPane.showMessageDialog(null, "Bacteria population saved successfully.");
+                        } catch (IOException ex) {
+                            JOptionPane.showMessageDialog(null, "An error occurred while saving the bacteria population.");
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Please select a bacteria population to save.");
+                }
+            }
+        });
+        add(saveButton, BorderLayout.WEST);
     }
 
     private void updateList() {
