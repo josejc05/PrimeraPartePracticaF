@@ -26,10 +26,13 @@ public class ExperimentPanel extends JPanel {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: Implement the logic to add a new bacteria population
-                // For now, we just add a dummy population
-                experiment.addBacteriaPopulation(new BacteriaPopulation("Dummy", LocalDate.now(), LocalDate.now().plusDays(30), 100, 37.0, "Alta", 10, 15, 20, 5));
-                updateList();
+                // Open a dialog to get the details of the new bacteria population
+                BacteriaPopulationDialog dialog = new BacteriaPopulationDialog();
+                if (dialog.showDialog() == JOptionPane.OK_OPTION) {
+                    BacteriaPopulation newPopulation = dialog.getBacteriaPopulation();
+                    experiment.addBacteriaPopulation(newPopulation);
+                    updateList();
+                }
             }
         });
         add(addButton, BorderLayout.NORTH);
@@ -43,8 +46,7 @@ public class ExperimentPanel extends JPanel {
         removeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: Implement the logic to remove a bacteria population
-                // For now, we just remove the selected population
+                // Remove the selected bacteria population
                 BacteriaPopulation selectedPopulation = list.getSelectedValue();
                 if (selectedPopulation != null) {
                     experiment.removeBacteriaPopulation(selectedPopulation);
