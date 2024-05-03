@@ -57,6 +57,23 @@ public class ExperimentPanel extends JPanel {
             }
         });
         add(removeButton, BorderLayout.SOUTH);
+
+        // Create a button to view details of a bacteria population
+        JButton viewDetailsButton = new JButton("View Details");
+        viewDetailsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Show the details of the selected bacteria population
+                BacteriaPopulation selectedPopulation = list.getSelectedValue();
+                if (selectedPopulation != null) {
+                    BacteriaPopulationPanel detailsPanel = new BacteriaPopulationPanel(selectedPopulation);
+                    JOptionPane.showMessageDialog(null, detailsPanel, "Bacteria Population Details", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Please select a bacteria population to view details.");
+                }
+            }
+        });
+        add(viewDetailsButton, BorderLayout.EAST);
     }
 
     private void updateList() {
