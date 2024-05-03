@@ -15,11 +15,57 @@ import java.util.Vector;
 public class ExperimentPanel extends JPanel {
     private Experiment experiment;
     private JList<BacteriaPopulation> list;
+    private String currentFile;
 
     public ExperimentPanel() {
         setLayout(new BorderLayout());
         experiment = new Experiment();
         list = new JList<>();
+
+        // Create a button to open an existing experiment
+        JButton openButton = new JButton("Open Experiment");
+        openButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                    currentFile = fileChooser.getSelectedFile().getPath();
+                    try {
+                        experiment = ExperimentFileHandler.loadExperiment(currentFile);
+                        updateList();
+                    } catch (IOException | ClassNotFoundException ex) {
+                        JOptionPane.showMessageDialog(null, "Error loading experiment: " + ex.getMessage());
+                    }
+                }
+            }
+        });
+        add(openButton, BorderLayout.WEST);
+
+        // Create a button to save the current experiment
+        JButton saveButton = new JButton("Save Experiment");
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (currentFile != null) {
+                    try {
+                        ExperimentFileHandler.saveExperiment(experiment, currentFile);
+                    } catch (IOException ex) {
+                        JOptionPane.showMessageDialog(null, "Error saving experiment: " + ex.getMessage());
+                    }
+                } else {
+                    JFileChooser fileChooser = new JFileChooser();
+                    if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+                        currentFile = fileChooser.getSelectedFile().getPath();
+                        try {
+                            ExperimentFileHandler.saveExperiment(experiment, currentFile);
+                        } catch (IOException ex) {
+                            JOptionPane.showMessageDialog(null, "Error saving experiment: " + ex.getMessage());
+                        }
+                    }
+                }
+            }
+        });
+        add(saveButton, BorderLayout.WEST);
 
         // Create a button to add a new bacteria population
         JButton addButton = new JButton("Add Bacteria Population");
