@@ -64,4 +64,20 @@ public class BacteriaPopulation {
     public int[] getFoodDose() {
         return foodDose;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Name: ").append(name).append("\n");
+        sb.append("Start Date: ").append(startDate).append("\n");
+        sb.append("End Date: ").append(endDate).append("\n");
+        sb.append("Initial Bacteria Count: ").append(initialBacteriaCount).append("\n");
+        sb.append("Temperature: ").append(temperature).append("\n");
+        sb.append("Light Condition: ").append(lightCondition).append("\n");
+        sb.append("Food Dose: ");
+        for (int i = 0; i < foodDose.length; i++) {
+            sb.append("\nDay ").append(i+1).append(": ").append(foodDose[i]);
+        }
+        return sb.toString();
+    }
 }
