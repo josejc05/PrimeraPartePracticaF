@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="PrimeraPartePracticaF:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/PrimeraPartePracticaF_jar</output-path>
+    <root id="archive" name="PrimeraPartePracticaF.jar">
+      <element id="module-output" name="PrimeraPartePracticaF" />
+    </root>
+  </artifact>
+</component>
