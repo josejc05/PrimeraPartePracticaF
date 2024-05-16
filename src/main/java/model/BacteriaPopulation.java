@@ -10,8 +10,10 @@ public class BacteriaPopulation {
     private double temperature;
     private String lightCondition;
     private int[] foodDose;
+    private int duration; // Duración del experimento en días
+    private String foodSupplyPattern; // Patrón de suministro de comida
 
-    public BacteriaPopulation(String name, LocalDate startDate, LocalDate endDate, int initialBacteriaCount, double temperature, String lightCondition, int initialFood, int peakDay, int peakFood, int finalFood) {
+    public BacteriaPopulation(String name, LocalDate startDate, LocalDate endDate, int initialBacteriaCount, double temperature, String lightCondition, int initialFood, int peakDay, int peakFood, int finalFood, int duration, String foodSupplyPattern) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -19,6 +21,8 @@ public class BacteriaPopulation {
         this.temperature = temperature;
         this.lightCondition = lightCondition;
         this.foodDose = new int[30];
+        this.duration = duration;
+        this.foodSupplyPattern = foodSupplyPattern;
         calculateFoodDose(initialFood, peakDay, peakFood, finalFood);
     }
 
@@ -32,7 +36,7 @@ public class BacteriaPopulation {
             if (i < peakDay) {
                 foodDose[i] = initialFood + (int) (i * incrementRate);
             } else {
-                foodDose[i] = peakFood + (int) ((i - peakDay) * decrementRate);
+                foodDose[i] = peakFood - (int) ((i - peakDay) * decrementRate);
             }
         }
     }
@@ -63,6 +67,14 @@ public class BacteriaPopulation {
 
     public int[] getFoodDose() {
         return foodDose;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public String getFoodSupplyPattern() {
+        return foodSupplyPattern;
     }
 
     @Override
