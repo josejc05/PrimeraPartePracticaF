@@ -17,11 +17,13 @@ public class BacteriaPopulationDialog extends JDialog {
     private JTextField peakDayField;
     private JTextField peakFoodField;
     private JTextField finalFoodField;
+    private JTextField durationField; // Field for experiment duration
+    private JTextField foodSupplyPatternField; // Field for food supply pattern
     private int dialogResult = JOptionPane.CANCEL_OPTION;
 
     public BacteriaPopulationDialog() {
         setModal(true);
-        setLayout(new GridLayout(11, 2));
+        setLayout(new GridLayout(13, 2));
 
         // Create fields to enter the details of the bacteria population
         nameField = new JTextField();
@@ -34,6 +36,8 @@ public class BacteriaPopulationDialog extends JDialog {
         peakDayField = new JTextField();
         peakFoodField = new JTextField();
         finalFoodField = new JTextField();
+        durationField = new JTextField(); // Initialize the new field
+        foodSupplyPatternField = new JTextField(); // Initialize the new field
 
         // Add fields to the dialog
         add(new JLabel("Name:"));
@@ -56,6 +60,10 @@ public class BacteriaPopulationDialog extends JDialog {
         add(peakFoodField);
         add(new JLabel("Final Food:"));
         add(finalFoodField);
+        add(new JLabel("Duration:")); // Add label for the new field
+        add(durationField); // Add the new field
+        add(new JLabel("Food Supply Pattern:")); // Add label for the new field
+        add(foodSupplyPatternField); // Add the new field
 
         // Add OK and Cancel buttons
         JButton okButton = new JButton("OK");
@@ -92,7 +100,9 @@ public class BacteriaPopulationDialog extends JDialog {
         int peakDay = Integer.parseInt(peakDayField.getText());
         int peakFood = Integer.parseInt(peakFoodField.getText());
         int finalFood = Integer.parseInt(finalFoodField.getText());
+        int duration = Integer.parseInt(durationField.getText()); // Get the value from the new field
+        String foodSupplyPattern = foodSupplyPatternField.getText(); // Get the value from the new field
 
-        return new BacteriaPopulation(name, startDate, endDate, initialBacteriaCount, temperature, lightCondition, initialFood, peakDay, peakFood, finalFood);
+        return new BacteriaPopulation(name, startDate, endDate, initialBacteriaCount, temperature, lightCondition, initialFood, peakDay, peakFood, finalFood, duration, foodSupplyPattern);
     }
 }
