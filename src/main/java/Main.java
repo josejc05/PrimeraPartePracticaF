@@ -1,6 +1,5 @@
-import ui.ExperimentPanel;
-
 import javax.swing.*;
+import ui.ExperimentPanel; // Importa la clase ExperimentPanel
 
 public class Main {
     public static void main(String[] args) {
