@@ -61,40 +61,4 @@ public class BacteriaPopulation {
     public String getFoodSupplyPattern() {
         return foodSupplyPattern;
     }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
-
-    public void setInitialBacteriaCount(int initialBacteriaCount) {
-        this.initialBacteriaCount = initialBacteriaCount;
-    }
-
-    public void setTemperature(double temperature) {
-        this.temperature = temperature;
-    }
-
-    public void setLightCondition(String lightCondition) {
-        this.lightCondition = lightCondition;
-    }
-
-    public void setFoodDoseMicrograms(long[] foodDoseMicrograms) {
-        this.foodDoseMicrograms = foodDoseMicrograms;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
-    public void setFoodSupplyPattern(String foodSupplyPattern) {
-        this.foodSupplyPattern = foodSupplyPattern;
-    }
 }
