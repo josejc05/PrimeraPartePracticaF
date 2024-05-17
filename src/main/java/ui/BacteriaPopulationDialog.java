@@ -1,8 +1,4 @@
 // En BacteriaPopulationDialog.java
-package ui;
-
-import model.BacteriaPopulation;
-
 import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
@@ -16,15 +12,14 @@ public class BacteriaPopulationDialog extends JDialog {
     private JTextField temperatureField;
     private JTextField lightConditionField;
     private JTextField foodDoseField;
-    private JTextField durationField; // Field for experiment duration
-    private JTextField foodSupplyPatternField; // Field for food supply pattern
+    private JTextField durationField;
+    private JTextField foodSupplyPatternField;
     private int dialogResult = JOptionPane.CANCEL_OPTION;
 
     public BacteriaPopulationDialog() {
         setModal(true);
-        setLayout(new GridLayout(13, 2));
+        setLayout(new GridLayout(11, 2));
 
-        // Create fields to enter the details of the bacteria population
         nameField = new JTextField();
         startDateField = new JTextField();
         endDateField = new JTextField();
@@ -32,10 +27,9 @@ public class BacteriaPopulationDialog extends JDialog {
         temperatureField = new JTextField();
         lightConditionField = new JTextField();
         foodDoseField = new JTextField();
-        durationField = new JTextField(); // Initialize the new field
-        foodSupplyPatternField = new JTextField(); // Initialize the new field
+        durationField = new JTextField();
+        foodSupplyPatternField = new JTextField();
 
-        // Add fields to the dialog
         add(new JLabel("Name:"));
         add(nameField);
         add(new JLabel("Start Date (YYYY-MM-DD):"));
@@ -50,12 +44,11 @@ public class BacteriaPopulationDialog extends JDialog {
         add(lightConditionField);
         add(new JLabel("Food Dose (micrograms):"));
         add(foodDoseField);
-        add(new JLabel("Duration:")); // Add label for the new field
-        add(durationField); // Add the new field
-        add(new JLabel("Food Supply Pattern:")); // Add label for the new field
-        add(foodSupplyPatternField); // Add the new field
+        add(new JLabel("Duration:"));
+        add(durationField);
+        add(new JLabel("Food Supply Pattern:"));
+        add(foodSupplyPatternField);
 
-        // Add OK and Cancel buttons
         JButton okButton = new JButton("OK");
         okButton.addActionListener(e -> {
             dialogResult = JOptionPane.OK_OPTION;
@@ -79,7 +72,6 @@ public class BacteriaPopulationDialog extends JDialog {
     }
 
     public BacteriaPopulation getBacteriaPopulation() {
-        // Get the details from the fields and create a new BacteriaPopulation
         String name = nameField.getText();
         LocalDate startDate = LocalDate.parse(startDateField.getText());
         LocalDate endDate = LocalDate.parse(endDateField.getText());
@@ -88,7 +80,7 @@ public class BacteriaPopulationDialog extends JDialog {
         String lightCondition = lightConditionField.getText();
         long[] foodDoseMicrograms = Arrays.stream(foodDoseField.getText().split(","))
                 .mapToLong(Long::parseLong)
-                .toArray(); // Convertir a long
+                .toArray();
         int duration = Integer.parseInt(durationField.getText());
         String foodSupplyPattern = foodSupplyPatternField.getText();
 
