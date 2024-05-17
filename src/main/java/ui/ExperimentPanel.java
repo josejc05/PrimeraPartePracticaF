@@ -16,7 +16,7 @@ public class ExperimentPanel extends JPanel {
 
     public ExperimentPanel() {
         setLayout(new BorderLayout());
-        experiment = new Experiment(20, 10, 40000); // Ajusta estos valores según sea necesario
+        experiment = new Experiment(20, 10, 40000);
         list = new JList<>();
 
         JButton openButton = new JButton("Open Experiment");
@@ -93,7 +93,10 @@ public class ExperimentPanel extends JPanel {
         southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.Y_AXIS));
 
         JButton runButton = new JButton("Run Experiment");
-        runButton.addActionListener(e -> runSimulation());
+        runButton.addActionListener(e -> {
+            SimulationResult result = experiment.run();
+            showSimulationResults(result);
+        });
         southPanel.add(runButton);
 
         JButton removeButton = new JButton("Remove Bacteria Population");
