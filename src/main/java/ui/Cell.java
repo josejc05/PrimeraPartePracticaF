@@ -1,9 +1,9 @@
+// En Cell.java
 package ui;
 
 import java.util.ArrayList;
 import java.util.List;
 
-// En Cell.java
 public class Cell {
     private List<Bacteria> bacteriaList = new ArrayList<>();
     private int food;
@@ -33,17 +33,18 @@ public class Cell {
         for (Bacteria bacteria : bacteriaList) {
             int foodEaten = bacteria.simulate(food);
             food -= foodEaten;
-            if (foodEaten >= 150) {
-                newBacteriaList.add(new Bacteria());
-                newBacteriaList.add(new Bacteria());
-                newBacteriaList.add(new Bacteria());
-            } else if (foodEaten >= 100) {
-                newBacteriaList.add(new Bacteria());
-                newBacteriaList.add(new Bacteria());
-            } else if (foodEaten >= 50) {
-                newBacteriaList.add(new Bacteria());
+            if (!bacteria.isDead(food)) {
+                if (bacteria.shouldMove()) {
+                    // La lógica de movimiento se manejará en la clase Experiment
+                } else {
+                    newBacteriaList.add(bacteria);
+                }
+                for (int i = 0; i < bacteria.getOffspringCount(); i++) {
+                    newBacteriaList.add(new Bacteria());
+                }
             }
         }
+        bacteriaList.clear();
         bacteriaList.addAll(newBacteriaList);
     }
 }
