@@ -1,8 +1,8 @@
+// En BacteriaPopulation.java
 package model;
 
 import java.time.LocalDate;
 
-// En BacteriaPopulation.java
 public class BacteriaPopulation {
     private String name;
     private LocalDate startDate;
@@ -10,7 +10,7 @@ public class BacteriaPopulation {
     private int initialBacteriaCount;
     private double temperature;
     private String lightCondition;
-    private long[] foodDoseMicrograms; // Cambiado a microgramos
+    private long[] foodDoseMicrograms;
     private int duration; // Duración del experimento ahora es variable
     private String foodSupplyPattern; // Nuevo campo para el patrón de suministro de alimentos
 
