@@ -1,3 +1,4 @@
+// En ExperimentPanel.java
 package ui;
 
 import model.Experiment;
@@ -34,7 +35,7 @@ public class ExperimentPanel extends JPanel {
                         experiment = ExperimentFileHandler.loadExperiment(currentFile);
                         updateList();
                     } catch (IOException | ClassNotFoundException ex) {
-                        JOptionPane.showMessageDialog(null, "Error loading experiment: " + ex.getMessage());
+                        JOptionPane.showMessageDialog(null, "Failed to open experiment: " + ex.getMessage());
                     }
                 }
             }
@@ -50,7 +51,7 @@ public class ExperimentPanel extends JPanel {
                     try {
                         ExperimentFileHandler.saveExperiment(experiment, currentFile);
                     } catch (IOException ex) {
-                        JOptionPane.showMessageDialog(null, "Error saving experiment: " + ex.getMessage());
+                        JOptionPane.showMessageDialog(null, "Failed to save experiment: " + ex.getMessage());
                     }
                 } else {
                     JFileChooser fileChooser = new JFileChooser();
@@ -59,7 +60,7 @@ public class ExperimentPanel extends JPanel {
                         try {
                             ExperimentFileHandler.saveExperiment(experiment, currentFile);
                         } catch (IOException ex) {
-                            JOptionPane.showMessageDialog(null, "Error saving experiment: " + ex.getMessage());
+                            JOptionPane.showMessageDialog(null, "Failed to save experiment: " + ex.getMessage());
                         }
                     }
                 }
