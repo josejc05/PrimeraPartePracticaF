@@ -1,4 +1,3 @@
-// En ExperimentPanel.java
 package ui;
 
 import model.Experiment;
@@ -9,7 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Vector;
 
 public class ExperimentPanel extends JPanel {
@@ -140,5 +138,44 @@ public class ExperimentPanel extends JPanel {
     private void updateList() {
         list.setListData(new Vector<BacteriaPopulation>(experiment.getBacteriaPopulations()));
         list.repaint();
+    }
+
+    public void showSimulationResults(SimulationResult result) {
+        int size = result.getBacteriaCounts()[0].length;
+        JPanel resultPanel = new JPanel(new GridLayout(size, size));
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                JLabel cellLabel = new JLabel();
+                cellLabel.setOpaque(true);
+                int bacteriaCount = result.getBacteriaCounts()[days - 1][i][j];
+                if (bacteriaCount >= 20) {
+                    cellLabel.setBackground(Color.RED);
+                } else if (bacteriaCount >= 15) {
+                    cellLabel.setBackground(Color.MAGENTA);
+                } else if (bacteriaCount >= 10) {
+                    cellLabel.setBackground(Color.ORANGE);
+                } else if (bacteriaCount >= 5) {
+                    cellLabel.setBackground(Color.YELLOW);
+                } else if (bacteriaCount >= 1) {
+                    cellLabel.setBackground(Color.GREEN);
+                } else {
+                    cellLabel.setBackground(Color.WHITE);
+                }
+                resultPanel.add(cellLabel);
+            }
+        }
+
+        JFrame resultFrame = new JFrame("Simulation Results");
+        resultFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        resultFrame.add(new JScrollPane(resultPanel));
+        resultFrame.pack();
+        resultFrame.setLocationRelativeTo(null);
+        resultFrame.setVisible(true);
+    }
+
+    public void runSimulation() {
+        SimulationResult result = experiment.run();
+        showSimulationResults(result);
     }
 }
