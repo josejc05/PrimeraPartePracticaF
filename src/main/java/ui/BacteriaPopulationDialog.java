@@ -1,4 +1,7 @@
 // En BacteriaPopulationDialog.java
+package ui;
+
+import model.BacteriaPopulation;
 import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
