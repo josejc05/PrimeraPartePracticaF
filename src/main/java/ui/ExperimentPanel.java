@@ -4,12 +4,14 @@ package ui;
 import model.Experiment;
 import model.BacteriaPopulation;
 import data.ExperimentFileHandler;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Vector;
 
 public class ExperimentPanel extends JPanel {
@@ -107,6 +109,27 @@ public class ExperimentPanel extends JPanel {
             }
         });
         add(viewDetailsButton, BorderLayout.EAST);
+
+        JButton sortByStartDateButton = new JButton("Sort by Start Date");
+        sortByStartDateButton.addActionListener(e -> {
+            experiment.getBacteriaPopulations().sort(Comparator.comparing(BacteriaPopulation::getStartDate));
+            updateList();
+        });
+        add(sortByStartDateButton, BorderLayout.NORTH);
+
+        JButton sortByNameButton = new JButton("Sort by Name");
+        sortByNameButton.addActionListener(e -> {
+            experiment.getBacteriaPopulations().sort(Comparator.comparing(BacteriaPopulation::getName));
+            updateList();
+        });
+        add(sortByNameButton, BorderLayout.NORTH);
+
+        JButton sortByBacteriaCountButton = new JButton("Sort by Bacteria Count");
+        sortByBacteriaCountButton.addActionListener(e -> {
+            experiment.getBacteriaPopulations().sort(Comparator.comparingInt(BacteriaPopulation::getInitialBacteriaCount));
+            updateList();
+        });
+        add(sortByBacteriaCountButton, BorderLayout.NORTH);
     }
 
     private void updateList() {
