@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Vector;
 
 public class ExperimentPanel extends JPanel {
@@ -116,8 +117,16 @@ public class ExperimentPanel extends JPanel {
                 // Show the details of the selected bacteria population
                 BacteriaPopulation selectedPopulation = list.getSelectedValue();
                 if (selectedPopulation != null) {
-                    BacteriaPopulationPanel detailsPanel = new BacteriaPopulationPanel(selectedPopulation);
-                    JOptionPane.showMessageDialog(null, detailsPanel, "Bacteria Population Details", JOptionPane.INFORMATION_MESSAGE);
+                    String details = "Name: " + selectedPopulation.getName() + "\n"
+                            + "Start Date: " + selectedPopulation.getStartDate() + "\n"
+                            + "End Date: " + selectedPopulation.getEndDate() + "\n"
+                            + "Initial Bacteria Count: " + selectedPopulation.getInitialBacteriaCount() + "\n"
+                            + "Temperature: " + selectedPopulation.getTemperature() + "\n"
+                            + "Light Condition: " + selectedPopulation.getLightCondition() + "\n"
+                            + "Food Dose (micrograms): " + Arrays.toString(selectedPopulation.getFoodDoseMicrograms()) + "\n"
+                            + "Duration: " + selectedPopulation.getDuration() + "\n"
+                            + "Food Supply Pattern: " + selectedPopulation.getFoodSupplyPattern();
+                    JOptionPane.showMessageDialog(null, details, "Bacteria Population Details", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(null, "Please select a bacteria population to view details.");
                 }
