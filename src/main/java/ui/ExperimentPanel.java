@@ -77,21 +77,21 @@ public class ExperimentPanel extends JPanel {
         JPanel sortButtonsPanel = new JPanel();
         JButton sortByStartDateButton = new JButton("Sort by Start Date");
         sortByStartDateButton.addActionListener(e -> {
-            experiment.getBacteriaPopulations().sort(Comparator.comparing(BacteriaPopulation::getStartDate));
+            experiment.getBacteriaPopulations().sort((p1, p2) -> p1.getStartDate().compareTo(p2.getStartDate()));
             updateList();
         });
         sortButtonsPanel.add(sortByStartDateButton);
 
         JButton sortByNameButton = new JButton("Sort by Name");
         sortByNameButton.addActionListener(e -> {
-            experiment.getBacteriaPopulations().sort(Comparator.comparing(BacteriaPopulation::getName));
+            experiment.getBacteriaPopulations().sort((p1, p2) -> p1.getName().compareTo(p2.getName()));
             updateList();
         });
         sortButtonsPanel.add(sortByNameButton);
 
         JButton sortByBacteriaCountButton = new JButton("Sort by Bacteria Count");
         sortByBacteriaCountButton.addActionListener(e -> {
-            experiment.getBacteriaPopulations().sort(Comparator.comparingInt(BacteriaPopulation::getInitialBacteriaCount));
+            experiment.getBacteriaPopulations().sort((p1, p2) -> Integer.compare(p1.getInitialBacteriaCount(), p2.getInitialBacteriaCount()));
             updateList();
         });
         sortButtonsPanel.add(sortByBacteriaCountButton);
@@ -139,5 +139,6 @@ public class ExperimentPanel extends JPanel {
 
     private void updateList() {
         list.setListData(new Vector<BacteriaPopulation>(experiment.getBacteriaPopulations()));
+        list.repaint();
     }
 }
