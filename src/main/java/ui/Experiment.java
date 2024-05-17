@@ -3,6 +3,7 @@ package ui;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import ui.SimulationResult;
 
 public class Experiment {
     private Cell[][] plate;

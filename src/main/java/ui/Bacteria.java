@@ -2,6 +2,7 @@ package ui;
 
 import java.util.Random;
 
+// En Bacteria.java
 public class Bacteria {
     private static final Random RANDOM = new Random();
     private int foodEaten;
@@ -14,31 +15,30 @@ public class Bacteria {
         return foodEaten;
     }
 
-    public boolean isDead(int foodInCell) {
-        int randomNumber = RANDOM.nextInt(100);
-        if (foodInCell >= 100) {
-            return randomNumber < 3;
-        } else if (foodInCell > 9) {
-            return randomNumber < 6;
-        } else {
-            return randomNumber < 20;
+    public int simulate(int foodInCell) {
+        int foodEatenToday = 0;
+        for (int i = 0; i < 10; i++) {
+            int randomNumber = RANDOM.nextInt(100);
+            if (foodInCell >= 100) {
+                eat(20);
+                foodInCell -= 20;
+                foodEatenToday += 20;
+                if (randomNumber < 3) {
+                    return foodEatenToday;
+                }
+            } else if (foodInCell > 9) {
+                eat(10);
+                foodInCell -= 10;
+                foodEatenToday += 10;
+                if (randomNumber < 6) {
+                    return foodEatenToday;
+                }
+            } else {
+                if (randomNumber < 20) {
+                    return foodEatenToday;
+                }
+            }
         }
-    }
-
-    public boolean shouldMove() {
-        int randomNumber = RANDOM.nextInt(100);
-        return randomNumber >= 60;
-    }
-
-    public int getOffspringCount() {
-        if (foodEaten >= 150) {
-            return 3;
-        } else if (foodEaten >= 100) {
-            return 2;
-        } else if (foodEaten >= 50) {
-            return 1;
-        } else {
-            return 0;
-        }
+        return foodEatenToday;
     }
 }

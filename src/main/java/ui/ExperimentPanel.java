@@ -7,7 +7,6 @@ import data.ExperimentFileHandler;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Vector;
 
 public class ExperimentPanel extends JPanel {
@@ -17,7 +16,7 @@ public class ExperimentPanel extends JPanel {
 
     public ExperimentPanel() {
         setLayout(new BorderLayout());
-        experiment = new Experiment();
+        experiment = new Experiment(20, 10, 40000); // Ajusta estos valores según sea necesario
         list = new JList<>();
 
         JButton openButton = new JButton("Open Experiment");
@@ -124,7 +123,7 @@ public class ExperimentPanel extends JPanel {
                         + "Initial Bacteria Count: " + selectedPopulation.getInitialBacteriaCount() + "\n"
                         + "Temperature: " + selectedPopulation.getTemperature() + "\n"
                         + "Light Condition: " + selectedPopulation.getLightCondition() + "\n"
-                        + "Food Dose (micrograms): " + Arrays.toString(selectedPopulation.getFoodDoseMicrograms()) + "\n"
+                        + "Food Dose (micrograms): " + selectedPopulation.getFoodDoseMicrograms() + "\n"
                         + "Duration: " + selectedPopulation.getDuration() + "\n"
                         + "Food Supply Pattern: " + selectedPopulation.getFoodSupplyPattern();
                 JOptionPane.showMessageDialog(null, details, "Bacteria Population Details", JOptionPane.INFORMATION_MESSAGE);
@@ -175,6 +174,7 @@ public class ExperimentPanel extends JPanel {
     }
 
     public void runSimulation() {
+        experiment.run();
         SimulationResult result = experiment.run();
         showSimulationResults(result);
     }
