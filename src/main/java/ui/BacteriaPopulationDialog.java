@@ -1,3 +1,4 @@
+// En BacteriaPopulationDialog.java
 package ui;
 
 import model.BacteriaPopulation;
@@ -5,6 +6,7 @@ import model.BacteriaPopulation;
 import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
+import java.util.Arrays;
 
 public class BacteriaPopulationDialog extends JDialog {
     private JTextField nameField;
@@ -13,10 +15,7 @@ public class BacteriaPopulationDialog extends JDialog {
     private JTextField initialBacteriaCountField;
     private JTextField temperatureField;
     private JTextField lightConditionField;
-    private JTextField initialFoodField;
-    private JTextField peakDayField;
-    private JTextField peakFoodField;
-    private JTextField finalFoodField;
+    private JTextField foodDoseField;
     private JTextField durationField; // Field for experiment duration
     private JTextField foodSupplyPatternField; // Field for food supply pattern
     private int dialogResult = JOptionPane.CANCEL_OPTION;
@@ -32,10 +31,7 @@ public class BacteriaPopulationDialog extends JDialog {
         initialBacteriaCountField = new JTextField();
         temperatureField = new JTextField();
         lightConditionField = new JTextField();
-        initialFoodField = new JTextField();
-        peakDayField = new JTextField();
-        peakFoodField = new JTextField();
-        finalFoodField = new JTextField();
+        foodDoseField = new JTextField();
         durationField = new JTextField(); // Initialize the new field
         foodSupplyPatternField = new JTextField(); // Initialize the new field
 
@@ -52,14 +48,8 @@ public class BacteriaPopulationDialog extends JDialog {
         add(temperatureField);
         add(new JLabel("Light Condition:"));
         add(lightConditionField);
-        add(new JLabel("Initial Food:"));
-        add(initialFoodField);
-        add(new JLabel("Peak Day:"));
-        add(peakDayField);
-        add(new JLabel("Peak Food:"));
-        add(peakFoodField);
-        add(new JLabel("Final Food:"));
-        add(finalFoodField);
+        add(new JLabel("Food Dose (micrograms):"));
+        add(foodDoseField);
         add(new JLabel("Duration:")); // Add label for the new field
         add(durationField); // Add the new field
         add(new JLabel("Food Supply Pattern:")); // Add label for the new field
@@ -96,13 +86,12 @@ public class BacteriaPopulationDialog extends JDialog {
         int initialBacteriaCount = Integer.parseInt(initialBacteriaCountField.getText());
         double temperature = Double.parseDouble(temperatureField.getText());
         String lightCondition = lightConditionField.getText();
-        int initialFood = Integer.parseInt(initialFoodField.getText());
-        int peakDay = Integer.parseInt(peakDayField.getText());
-        int peakFood = Integer.parseInt(peakFoodField.getText());
-        int finalFood = Integer.parseInt(finalFoodField.getText());
-        int duration = Integer.parseInt(durationField.getText()); // Get the value from the new field
-        String foodSupplyPattern = foodSupplyPatternField.getText(); // Get the value from the new field
+        long[] foodDoseMicrograms = Arrays.stream(foodDoseField.getText().split(","))
+                .mapToLong(Long::parseLong)
+                .toArray(); // Convertir a long
+        int duration = Integer.parseInt(durationField.getText());
+        String foodSupplyPattern = foodSupplyPatternField.getText();
 
-        return new BacteriaPopulation(name, startDate, endDate, initialBacteriaCount, temperature, lightCondition, initialFood, peakDay, peakFood, finalFood, duration, foodSupplyPattern);
+        return new BacteriaPopulation(name, startDate, endDate, initialBacteriaCount, temperature, lightCondition, foodDoseMicrograms, duration, foodSupplyPattern);
     }
 }
