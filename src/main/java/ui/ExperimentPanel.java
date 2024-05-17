@@ -1,4 +1,9 @@
 // En ExperimentPanel.java
+package ui;
+
+import model.Experiment;
+import model.BacteriaPopulation;
+import data.ExperimentFileHandler;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
