@@ -1,3 +1,4 @@
+// En Main.java
 import javax.swing.*;
 import ui.ExperimentPanel; // Importa la clase ExperimentPanel
 

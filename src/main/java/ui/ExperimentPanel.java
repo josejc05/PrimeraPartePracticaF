@@ -1,6 +1,7 @@
 // En ExperimentPanel.java
 package ui;
 
+import java.util.Arrays;
 import model.Experiment;
 import model.BacteriaPopulation;
 import data.ExperimentFileHandler;
@@ -10,8 +11,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.Vector;
 
 public class ExperimentPanel extends JPanel {
