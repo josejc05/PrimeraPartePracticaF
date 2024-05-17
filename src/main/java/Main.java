@@ -1,4 +1,5 @@
 // En Main.java
+import ui.ExperimentPanel;
 import javax.swing.*;
 
 public class Main {
