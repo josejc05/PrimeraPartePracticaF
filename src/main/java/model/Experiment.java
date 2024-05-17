@@ -1,13 +1,16 @@
 package model;
 
+import ui.SimulationResult;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Experiment {
     private List<BacteriaPopulation> bacteriaPopulations;
+    private int days;
 
     public Experiment() {
         this.bacteriaPopulations = new ArrayList<>();
+        this.days = 0;
     }
 
     public void addBacteriaPopulation(BacteriaPopulation bacteriaPopulation) {
@@ -20,5 +23,18 @@ public class Experiment {
 
     public List<BacteriaPopulation> getBacteriaPopulations() {
         return bacteriaPopulations;
+    }
+
+    public int getDays() {
+        return this.days;
+    }
+
+    public void setDays(int days) {
+        this.days = days;
+    }
+
+    public SimulationResult run() {
+        SimulationResult result = new SimulationResult(days, 0);
+        return result;
     }
 }
