@@ -89,6 +89,13 @@ public class ExperimentPanel extends JPanel {
         updateList();
         add(new JScrollPane(list), BorderLayout.CENTER);
 
+        JPanel southPanel = new JPanel();
+        southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.Y_AXIS));
+
+        JButton runButton = new JButton("Run Experiment");
+        runButton.addActionListener(e -> runSimulation());
+        southPanel.add(runButton);
+
         JButton removeButton = new JButton("Remove Bacteria Population");
         removeButton.setBackground(Color.RED);
         removeButton.addActionListener(e -> {
@@ -98,7 +105,9 @@ public class ExperimentPanel extends JPanel {
                 updateList();
             }
         });
-        add(removeButton, BorderLayout.SOUTH);
+        southPanel.add(removeButton);
+
+        add(southPanel, BorderLayout.SOUTH);
 
         JButton viewDetailsButton = new JButton("View Details");
         viewDetailsButton.setBackground(Color.BLUE);
@@ -114,10 +123,6 @@ public class ExperimentPanel extends JPanel {
             }
         });
         add(viewDetailsButton, BorderLayout.EAST);
-
-        JButton runButton = new JButton("Run Experiment");
-        runButton.addActionListener(e -> runSimulation());
-        add(runButton, BorderLayout.SOUTH);
     }
 
     private void updateList() {
