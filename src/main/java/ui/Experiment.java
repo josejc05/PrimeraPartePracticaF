@@ -83,4 +83,8 @@ public class Experiment {
 
         return result;
     }
+
+    public int getDays() {
+        return days;
+    }
 }

@@ -16,4 +16,8 @@ public class SimulationResult {
     public void setFoodAmount(int day, int x, int y, int amount) {
         foodAmounts[day][x][y] = amount;
     }
+
+    public int[][][] getBacteriaCounts() {
+        return bacteriaCounts;
+    }
 }

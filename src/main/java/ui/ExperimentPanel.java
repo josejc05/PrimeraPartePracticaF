@@ -148,7 +148,7 @@ public class ExperimentPanel extends JPanel {
             for (int j = 0; j < size; j++) {
                 JLabel cellLabel = new JLabel();
                 cellLabel.setOpaque(true);
-                int bacteriaCount = result.getBacteriaCounts()[days - 1][i][j];
+                int bacteriaCount = result.getBacteriaCounts()[experiment.getDays() - 1][i][j];
                 if (bacteriaCount >= 20) {
                     cellLabel.setBackground(Color.RED);
                 } else if (bacteriaCount >= 15) {
