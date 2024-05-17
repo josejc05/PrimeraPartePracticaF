@@ -23,12 +23,12 @@ public class ExperimentPanel extends JPanel {
         openButton.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
             if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                currentFile = fileChooser.getSelectedFile().getPath();
+                currentFile = fileChooser.getSelectedFile().getAbsolutePath();
                 try {
                     experiment = ExperimentFileHandler.loadExperiment(currentFile);
                     updateList();
                 } catch (IOException | ClassNotFoundException ex) {
-                    JOptionPane.showMessageDialog(null, "Failed to open experiment: " + ex.getMessage());
+                    ex.printStackTrace();
                 }
             }
         });
@@ -40,21 +40,11 @@ public class ExperimentPanel extends JPanel {
                 try {
                     ExperimentFileHandler.saveExperiment(experiment, currentFile);
                 } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(null, "Failed to save experiment: " + ex.getMessage());
-                }
-            } else {
-                JFileChooser fileChooser = new JFileChooser();
-                if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-                    currentFile = fileChooser.getSelectedFile().getPath();
-                    try {
-                        ExperimentFileHandler.saveExperiment(experiment, currentFile);
-                    } catch (IOException ex) {
-                        JOptionPane.showMessageDialog(null, "Failed to save experiment: " + ex.getMessage());
-                    }
+                    ex.printStackTrace();
                 }
             }
         });
-        add(saveButton, BorderLayout.WEST);
+        add(saveButton, BorderLayout.EAST);
 
         JPanel northPanel = new JPanel();
         northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
@@ -64,8 +54,8 @@ public class ExperimentPanel extends JPanel {
         addButton.addActionListener(e -> {
             BacteriaPopulationDialog dialog = new BacteriaPopulationDialog();
             if (dialog.showDialog() == JOptionPane.OK_OPTION) {
-                BacteriaPopulation newPopulation = dialog.getBacteriaPopulation();
-                experiment.addBacteriaPopulation(newPopulation);
+                BacteriaPopulation bacteriaPopulation = dialog.getBacteriaPopulation();
+                experiment.addBacteriaPopulation(bacteriaPopulation);
                 updateList();
             }
         });
@@ -106,8 +96,6 @@ public class ExperimentPanel extends JPanel {
             if (selectedPopulation != null) {
                 experiment.removeBacteriaPopulation(selectedPopulation);
                 updateList();
-            } else {
-                JOptionPane.showMessageDialog(null, "Please select a bacteria population to remove.");
             }
         });
         add(removeButton, BorderLayout.SOUTH);
@@ -117,21 +105,19 @@ public class ExperimentPanel extends JPanel {
         viewDetailsButton.addActionListener(e -> {
             BacteriaPopulation selectedPopulation = list.getSelectedValue();
             if (selectedPopulation != null) {
-                String details = "Name: " + selectedPopulation.getName() + "\n"
-                        + "Start Date: " + selectedPopulation.getStartDate() + "\n"
-                        + "End Date: " + selectedPopulation.getEndDate() + "\n"
-                        + "Initial Bacteria Count: " + selectedPopulation.getInitialBacteriaCount() + "\n"
-                        + "Temperature: " + selectedPopulation.getTemperature() + "\n"
-                        + "Light Condition: " + selectedPopulation.getLightCondition() + "\n"
-                        + "Food Dose (micrograms): " + selectedPopulation.getFoodDoseMicrograms() + "\n"
-                        + "Duration: " + selectedPopulation.getDuration() + "\n"
-                        + "Food Supply Pattern: " + selectedPopulation.getFoodSupplyPattern();
-                JOptionPane.showMessageDialog(null, details, "Bacteria Population Details", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(null, "Please select a bacteria population to view details.");
+                BacteriaPopulationPanel bacteriaPopulationPanel = new BacteriaPopulationPanel(selectedPopulation);
+                JFrame frame = new JFrame("Bacteria Population Details");
+                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                frame.add(bacteriaPopulationPanel);
+                frame.pack();
+                frame.setVisible(true);
             }
         });
         add(viewDetailsButton, BorderLayout.EAST);
+
+        JButton runButton = new JButton("Run Experiment");
+        runButton.addActionListener(e -> runSimulation());
+        add(runButton, BorderLayout.SOUTH);
     }
 
     private void updateList() {
@@ -174,7 +160,6 @@ public class ExperimentPanel extends JPanel {
     }
 
     public void runSimulation() {
-        experiment.run();
         SimulationResult result = experiment.run();
         showSimulationResults(result);
     }
