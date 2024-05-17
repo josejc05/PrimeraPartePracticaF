@@ -7,10 +7,12 @@ import java.util.List;
 public class Experiment {
     private List<BacteriaPopulation> bacteriaPopulations;
     private int days;
+    private int foodPerDay;
 
-    public Experiment() {
+    public Experiment(int size, int days, int foodPerDay) {
         this.bacteriaPopulations = new ArrayList<>();
-        this.days = 0;
+        this.days = days;
+        this.foodPerDay = foodPerDay;
     }
 
     public void addBacteriaPopulation(BacteriaPopulation bacteriaPopulation) {
@@ -34,7 +36,7 @@ public class Experiment {
     }
 
     public SimulationResult run() {
-        SimulationResult result = new SimulationResult(days, 0);
+        SimulationResult result = new SimulationResult(days, bacteriaPopulations.size());
         return result;
     }
 }
