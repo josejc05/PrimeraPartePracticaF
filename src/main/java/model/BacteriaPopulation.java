@@ -11,8 +11,8 @@ public class BacteriaPopulation {
     private double temperature;
     private String lightCondition;
     private long[] foodDoseMicrograms;
-    private int duration; // Duración del experimento ahora es variable
-    private String foodSupplyPattern; // Nuevo campo para el patrón de suministro de alimentos
+    private int duration;
+    private String foodSupplyPattern;
 
     public BacteriaPopulation(String name, LocalDate startDate, LocalDate endDate, int initialBacteriaCount, double temperature, String lightCondition, long[] foodDoseMicrograms, int duration, String foodSupplyPattern) {
         this.name = name;
