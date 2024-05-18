@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 
 public class BacteriaPopulation {
     private String name;
@@ -57,6 +58,13 @@ public class BacteriaPopulation {
 
     @Override
     public String toString() {
-        return "Name: " + name + ", Start Date: " + startDate + ", Initial Bacteria Count: " + initialBacteriaCount;
+        return "Name: " + name +
+                ", Start Date: " + startDate +
+                ", Initial Bacteria Count: " + initialBacteriaCount +
+                ", Temperature: " + temperature +
+                ", Light Condition: " + lightCondition +
+                ", Food Dose (micrograms): " + Arrays.toString(foodDoseMicrograms) +
+                ", Duration: " + duration +
+                ", Food Supply Pattern: " + foodSupplyPattern;
     }
 }
