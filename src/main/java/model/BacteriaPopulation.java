@@ -1,4 +1,3 @@
-// En BacteriaPopulation.java
 package model;
 
 import java.time.LocalDate;
@@ -6,7 +5,6 @@ import java.time.LocalDate;
 public class BacteriaPopulation {
     private String name;
     private LocalDate startDate;
-    private LocalDate endDate;
     private int initialBacteriaCount;
     private double temperature;
     private String lightCondition;
@@ -14,10 +12,9 @@ public class BacteriaPopulation {
     private int duration;
     private String foodSupplyPattern;
 
-    public BacteriaPopulation(String name, LocalDate startDate, LocalDate endDate, int initialBacteriaCount, double temperature, String lightCondition, long[] foodDoseMicrograms, int duration, String foodSupplyPattern) {
+    public BacteriaPopulation(String name, LocalDate startDate, int initialBacteriaCount, double temperature, String lightCondition, long[] foodDoseMicrograms, int duration, String foodSupplyPattern) {
         this.name = name;
         this.startDate = startDate;
-        this.endDate = endDate;
         this.initialBacteriaCount = initialBacteriaCount;
         this.temperature = temperature;
         this.lightCondition = lightCondition;
@@ -32,10 +29,6 @@ public class BacteriaPopulation {
 
     public LocalDate getStartDate() {
         return startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
     }
 
     public int getInitialBacteriaCount() {

@@ -36,7 +36,12 @@ public class Experiment {
     }
 
     public SimulationResult run() {
-        SimulationResult result = new SimulationResult(days, bacteriaPopulations.size());
-        return result;
+        while (true) {
+            SimulationResult result = new SimulationResult(days, bacteriaPopulations.size());
+            if (/* todas las bacterias están muertas */) {
+                break;
+            }
+            return result;
+        }
     }
 }

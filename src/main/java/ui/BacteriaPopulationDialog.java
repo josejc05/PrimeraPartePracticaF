@@ -1,4 +1,3 @@
-// En BacteriaPopulationDialog.java
 package ui;
 
 import model.BacteriaPopulation;
@@ -10,7 +9,6 @@ import java.util.Arrays;
 public class BacteriaPopulationDialog extends JDialog {
     private JTextField nameField;
     private JTextField startDateField;
-    private JTextField endDateField;
     private JTextField initialBacteriaCountField;
     private JTextField temperatureField;
     private JTextField lightConditionField;
@@ -25,7 +23,6 @@ public class BacteriaPopulationDialog extends JDialog {
 
         nameField = new JTextField();
         startDateField = new JTextField();
-        endDateField = new JTextField();
         initialBacteriaCountField = new JTextField();
         temperatureField = new JTextField();
         lightConditionField = new JTextField();
@@ -37,8 +34,6 @@ public class BacteriaPopulationDialog extends JDialog {
         add(nameField);
         add(new JLabel("Start Date (YYYY-MM-DD):"));
         add(startDateField);
-        add(new JLabel("End Date (YYYY-MM-DD):"));
-        add(endDateField);
         add(new JLabel("Initial Bacteria Count:"));
         add(initialBacteriaCountField);
         add(new JLabel("Temperature:"));
@@ -77,7 +72,6 @@ public class BacteriaPopulationDialog extends JDialog {
     public BacteriaPopulation getBacteriaPopulation() {
         String name = nameField.getText();
         LocalDate startDate = LocalDate.parse(startDateField.getText());
-        LocalDate endDate = LocalDate.parse(endDateField.getText());
         int initialBacteriaCount = Integer.parseInt(initialBacteriaCountField.getText());
         double temperature = Double.parseDouble(temperatureField.getText());
         String lightCondition = lightConditionField.getText();
@@ -87,6 +81,6 @@ public class BacteriaPopulationDialog extends JDialog {
         int duration = Integer.parseInt(durationField.getText());
         String foodSupplyPattern = foodSupplyPatternField.getText();
 
-        return new BacteriaPopulation(name, startDate, endDate, initialBacteriaCount, temperature, lightCondition, foodDoseMicrograms, duration, foodSupplyPattern);
+        return new BacteriaPopulation(name, startDate, initialBacteriaCount, temperature, lightCondition, foodDoseMicrograms, duration, foodSupplyPattern);
     }
 }
