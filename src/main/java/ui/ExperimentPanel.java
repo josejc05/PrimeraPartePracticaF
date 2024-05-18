@@ -7,6 +7,9 @@ import data.ExperimentFileHandler;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Vector;
 
 public class ExperimentPanel extends JPanel {
@@ -64,22 +67,25 @@ public class ExperimentPanel extends JPanel {
         JPanel sortButtonsPanel = new JPanel();
         JButton sortByStartDateButton = new JButton("Sort by Start Date");
         sortByStartDateButton.addActionListener(e -> {
-            experiment.getBacteriaPopulations().sort((p1, p2) -> p1.getStartDate().compareTo(p2.getStartDate()));
-            updateList();
+            List<BacteriaPopulation> sortedBacteriaPopulations = new ArrayList<>(experiment.getBacteriaPopulations());
+            sortedBacteriaPopulations.sort(Comparator.comparing(BacteriaPopulation::getStartDate));
+            showSortedBacteriaPopulations(sortedBacteriaPopulations);
         });
         sortButtonsPanel.add(sortByStartDateButton);
 
         JButton sortByNameButton = new JButton("Sort by Name");
         sortByNameButton.addActionListener(e -> {
-            experiment.getBacteriaPopulations().sort((p1, p2) -> p1.getName().compareTo(p2.getName()));
-            updateList();
+            List<BacteriaPopulation> sortedBacteriaPopulations = new ArrayList<>(experiment.getBacteriaPopulations());
+            sortedBacteriaPopulations.sort(Comparator.comparing(BacteriaPopulation::getName));
+            showSortedBacteriaPopulations(sortedBacteriaPopulations);
         });
         sortButtonsPanel.add(sortByNameButton);
 
         JButton sortByBacteriaCountButton = new JButton("Sort by Bacteria Count");
         sortByBacteriaCountButton.addActionListener(e -> {
-            experiment.getBacteriaPopulations().sort((p1, p2) -> Integer.compare(p1.getInitialBacteriaCount(), p2.getInitialBacteriaCount()));
-            updateList();
+            List<BacteriaPopulation> sortedBacteriaPopulations = new ArrayList<>(experiment.getBacteriaPopulations());
+            sortedBacteriaPopulations.sort(Comparator.comparingInt(BacteriaPopulation::getInitialBacteriaCount));
+            showSortedBacteriaPopulations(sortedBacteriaPopulations);
         });
         sortButtonsPanel.add(sortByBacteriaCountButton);
 
@@ -131,6 +137,24 @@ public class ExperimentPanel extends JPanel {
     private void updateList() {
         list.setListData(new Vector<BacteriaPopulation>(experiment.getBacteriaPopulations()));
         list.repaint();
+    }
+
+    private void showSortedBacteriaPopulations(List<BacteriaPopulation> sortedBacteriaPopulations) {
+        JFrame frame = new JFrame("Sorted Bacteria Populations");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+
+        JTextArea textArea = new JTextArea();
+        textArea.setEditable(false);
+        for (BacteriaPopulation bacteriaPopulation : sortedBacteriaPopulations) {
+            textArea.append(bacteriaPopulation.toString() + "\n");
+        }
+
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        frame.add(scrollPane, BorderLayout.CENTER);
+
+        frame.pack();
+        frame.setVisible(true);
     }
 
     public void showSimulationResults(SimulationResult result) {

@@ -54,4 +54,9 @@ public class BacteriaPopulation {
     public String getFoodSupplyPattern() {
         return foodSupplyPattern;
     }
+
+    @Override
+    public String toString() {
+        return "Name: " + name + ", Start Date: " + startDate + ", Initial Bacteria Count: " + initialBacteriaCount;
+    }
 }
